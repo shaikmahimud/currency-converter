@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Login</title></head>
+<body style="font-family:Arial;display:flex;align-items:center;justify-content:center;height:100vh;background:#0b1220">
+  <div style="background:#1f2937;padding:28px;border-radius:12px;color:#fff;width:360px;">
+    <h2 style="margin:0 0 12px">Login</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for cat,msg in messages %}
+          <div style="background:rgba(255,255,255,0.06);padding:8px;border-radius:8px;margin-bottom:8px;">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <input id="username" name="username" placeholder="Username" required style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none"><br>
+      <input type="password" name="password" placeholder="Password" required style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none"><br>
+      <button style="width:100%;padding:10px;border-radius:8px;background:#3b82f6;color:white;border:none">Login</button>
+    </form>
+    <p style="margin-top:10px;color:#cbd5e1">Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+  </div>
+
+  {% if registered %}
+  <script>
+    alert("Successfully registered! Please log in.");
+    document.getElementById("username")?.focus();
+  </script>
+  {% endif %}
+</body>
+</html>

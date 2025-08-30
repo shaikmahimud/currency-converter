@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-4">
+    <h2 class="text-center mb-4">CurrencyConverter</h2>
+    <ul class="list-group">
+        {% for currency, rate in rates.items() %}
+            <li class="list-group-item bg-dark text-white d-flex justify-content-between">
+                <span>{{ currency }}</span>
+                <span>{{ rate }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('converter') }}" class="btn btn-custom w-100 mt-3">Go to Currency Converter</a>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger w-100 mt-2">Logout</a>
+</div>
+{% endblock %}

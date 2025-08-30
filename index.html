@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Converter</title></head>
+<body style="font-family:Arial;display:flex;align-items:center;justify-content:center;height:100vh;background:#041029">
+  <div style="background:#1f2937;padding:28px;border-radius:12px;color:#fff;width:760px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0">Currency Converter</h2>
+      <div>Hi, <b>{{ username }}</b> • <a href="{{ url_for('logout') }}" style="color:#fbbf24">Logout</a></div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div style="background:rgba(255,255,255,0.04);padding:8px;border-radius:8px;margin-bottom:8px;">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('converter') }}" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px">
+      <select name="from_currency" required>
+        {% for code in currencies %}
+          <option value="{{ code }}">{{ code }}</option>
+        {% endfor %}
+      </select>
+      <select name="to_currency" required>
+        {% for code in currencies %}
+          <option value="{{ code }}">{{ code }}</option>
+        {% endfor %}
+      </select>
+      <input type="number" step="any" name="amount" placeholder="Amount" required>
+      <button style="background:#3b82f6;color:#fff;border:none;padding:10px;border-radius:8px">Convert</button>
+    </form>
+
+    {% if result %}
+      <div style="margin-top:14px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-weight:700">{{ result }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>

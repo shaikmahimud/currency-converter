@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Register</title></head>
+<body style="font-family:Arial;display:flex;align-items:center;justify-content:center;height:100vh;background:#111">
+  <div style="background:#1f2937;padding:28px;border-radius:12px;color:#fff;width:360px;">
+    <h2 style="margin:0 0 12px">Create Account</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for cat, msg in messages %}
+          <div style="background:rgba(255,255,255,0.06);padding:8px;border-radius:8px;margin-bottom:8px;">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="POST" action="{{ url_for('register') }}">
+      <input name="username" placeholder="Choose Username" required style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none"><br>
+      <input type="password" name="password" placeholder="Choose Password" required style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none"><br>
+      <button style="width:100%;padding:10px;border-radius:8px;background:#10b981;color:white;border:none">Register</button>
+    </form>
+    <p style="margin-top:10px;color:#cbd5e1">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+  </div>
+</body>
+</html>
